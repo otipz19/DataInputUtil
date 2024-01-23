@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public final class DataInput {
+public final class StreamDataReader {
     private final BufferedReader reader;
 
-    public DataInput(InputStream inputStream) {
+    public StreamDataReader(InputStream inputStream) {
         InputStreamReader isr = new InputStreamReader(inputStream);
         reader = new BufferedReader(isr);
     }
@@ -47,7 +47,7 @@ public final class DataInput {
                 value = Double.valueOf(line);
                 break;
             } catch (NumberFormatException e) {
-                printValidationErrorMessage("\nDouble");
+                printValidationErrorMessage("Double");
             }
         }
         return value;

@@ -11,7 +11,7 @@ class DataInputTests {
     @Test
     public void getLineReturnsLine() {
         String text = "text";
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         String line = dataInput.getLine();
 
@@ -23,7 +23,7 @@ class DataInputTests {
         String firstLine = "first line";
         String secondLine = "Second line";
         String text = firstLine + "\n" + secondLine;
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         String line = dataInput.getLine();
 
@@ -36,7 +36,7 @@ class DataInputTests {
         String secondLine = "second";
         String thirdLine = "third";
         String text = String.join("\n", firstLine, secondLine, thirdLine);
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         String line = null;
         for(int i = 0; i < 3; i++){
@@ -49,7 +49,7 @@ class DataInputTests {
     @Test
     public void getLineReturnsNullOnEmptyStream() {
         String text = "";
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         String line = dataInput.getLine();
 
@@ -59,7 +59,7 @@ class DataInputTests {
     @Test
     public void getIntReturnsIntOnValidInput(){
         String text = "123";
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         int n = dataInput.getInt();
 
@@ -69,7 +69,7 @@ class DataInputTests {
     @Test
     public void getIntReadsUntilValidInput(){
         String text = "bla\nbla\nbla\n123";
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         int n = dataInput.getInt();
 
@@ -79,7 +79,7 @@ class DataInputTests {
     @Test
     public void getCharReturnsCharOnValidString(){
         String text = "Abc";
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         char actual = dataInput.getChar();
 
@@ -89,7 +89,7 @@ class DataInputTests {
     @Test
     public void getCharReadsUntilValidInput(){
         String text = "\n\n\nA";
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         char actual = dataInput.getChar();
 
@@ -100,7 +100,7 @@ class DataInputTests {
     public void getDoubleReadsUntilValidInput(){
         double expected = 12.345;
         String text = "\nbla\nbla\nbla\n" + expected;
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         double actual = dataInput.getDouble();
 
@@ -111,7 +111,7 @@ class DataInputTests {
     public void getDoubleReturnsDoubleOnValidInput(){
         double expected = 12.345;
         String text = Double.toString(expected);
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         double actual = dataInput.getDouble();
 
@@ -122,7 +122,7 @@ class DataInputTests {
     public void getLongReadsUntilValidInput(){
         long expected = -12345;
         String text = "\nbla\nbla\nbla\n" + expected;
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         long actual = dataInput.getLong();
 
@@ -133,7 +133,7 @@ class DataInputTests {
     public void getLongReturnsDoubleOnValidInput(){
         long expected = -12345;
         String text = Long.toString(expected);
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         double actual = dataInput.getLong();
 
@@ -144,7 +144,7 @@ class DataInputTests {
     public void getNotNegativeNumberReadsUntilValidInput(){
         double expected = 1;
         String text = "bla\n-2\nwww\n-7\n" + expected;
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         double actual = dataInput.getNotNegativeNumber();
 
@@ -155,16 +155,16 @@ class DataInputTests {
     public void getNegativeNumberReadsUntilValidInput(){
         double expected = -1;
         String text = "bla\n2\nwww\n7\n" + expected;
-        DataInput dataInput = getDataInput(text);
+        StreamDataReader dataInput = getDataInput(text);
 
         double actual = dataInput.getNegativeNumber();
 
         assertEquals(expected, actual);
     }
 
-    private DataInput getDataInput(String str){
+    private StreamDataReader getDataInput(String str){
         InputStream stream = getInputStreamFromString(str);
-        return new DataInput(stream);
+        return new StreamDataReader(stream);
     }
 
     private InputStream getInputStreamFromString(String str) {
