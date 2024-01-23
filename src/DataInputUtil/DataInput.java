@@ -13,6 +13,32 @@ public final class DataInput {
         reader = new BufferedReader(isr);
     }
 
+    public double getNotNegativeNumber(){
+        double value;
+        while(true){
+            value = getDouble();
+            if(value >= 0){
+                return value;
+            }
+            else{
+                printValidationErrorMessage("Not negative number");
+            }
+        }
+    }
+
+    public double getNegativeNumber(){
+        double value;
+        while(true){
+            value = getDouble();
+            if(value < 0){
+                return value;
+            }
+            else{
+                printValidationErrorMessage("Negative number");
+            }
+        }
+    }
+
     public double getDouble(){
         double value;
         while (true) {
@@ -21,7 +47,7 @@ public final class DataInput {
                 value = Double.valueOf(line);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("\nDouble expected. Input valid line:");
+                printValidationErrorMessage("\nDouble");
             }
         }
         return value;
@@ -35,7 +61,7 @@ public final class DataInput {
                 value = Long.valueOf(line);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("\nLong expected. Input valid line:");
+                printValidationErrorMessage("Long");
             }
         }
         return value;
@@ -48,7 +74,7 @@ public final class DataInput {
                 return str.charAt(0);
             }
             else{
-                System.out.println("\nCharacter expected. Input valid line: ");
+                printValidationErrorMessage("Character");
             }
         }
     }
@@ -61,7 +87,7 @@ public final class DataInput {
                 value = Integer.valueOf(line);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("\nInteger expected. Input valid line:");
+                printValidationErrorMessage("Integer");
             }
         }
         return value;
@@ -75,5 +101,9 @@ public final class DataInput {
             System.out.println("Unexpected error, while reading line, occurred:\n" + e.getMessage());
         }
         return str;
+    }
+
+    private static void printValidationErrorMessage(String expectedType) {
+        System.out.println("\n" + expectedType + " expected. Input valid line:");
     }
 }

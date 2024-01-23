@@ -140,6 +140,28 @@ class DataInputTests {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void getNotNegativeNumberReadsUntilValidInput(){
+        double expected = 1;
+        String text = "bla\n-2\nwww\n-7\n" + expected;
+        DataInput dataInput = getDataInput(text);
+
+        double actual = dataInput.getNotNegativeNumber();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getNegativeNumberReadsUntilValidInput(){
+        double expected = -1;
+        String text = "bla\n2\nwww\n7\n" + expected;
+        DataInput dataInput = getDataInput(text);
+
+        double actual = dataInput.getNegativeNumber();
+
+        assertEquals(expected, actual);
+    }
+
     private DataInput getDataInput(String str){
         InputStream stream = getInputStreamFromString(str);
         return new DataInput(stream);
