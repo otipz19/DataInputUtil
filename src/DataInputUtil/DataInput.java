@@ -7,14 +7,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public final class DataInput {
-    private InputStream inputStream;
+    private BufferedReader reader;
 
     public DataInput(){
-        this.inputStream = System.in;
+        this(System.in);
     }
 
     public DataInput(InputStream inputStream){
-        this.inputStream = inputStream;
+        InputStreamReader isr = new InputStreamReader(inputStream);
+        reader = new BufferedReader(isr);
     }
 
     public long getLong() throws IOException{
@@ -29,19 +30,24 @@ public final class DataInput {
     }
 
     public int getInt(){
-        String s = "";
-        s = getLine();
-        Integer value = Integer.valueOf(s);
+        int value;
+        while(true){
+            try{
+                String line = getLine();
+                value = Integer.valueOf(line);
+                break;
+            }
+            catch (NumberFormatException e){
+                System.out.println("\nInteger expected. Input valid line:");
+            }
+        }
         return value;
     }
 
     public String getLine(){
-        InputStreamReader isr = new InputStreamReader(inputStream);
-        BufferedReader br = new BufferedReader(isr);
         String str = null;
-
         try {
-            str = br.readLine();
+            str = reader.readLine();
         } catch (IOException e) {
             System.out.println("Unexpected error, while reading line, occurred:\n" + e.getMessage());
         }
