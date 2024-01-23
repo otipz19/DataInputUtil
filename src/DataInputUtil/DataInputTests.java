@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DataInputTests {
-
     @Test
     public void getLineReturnsLine() {
         String text = "text";
@@ -75,6 +74,70 @@ class DataInputTests {
         int n = dataInput.getInt();
 
         assertEquals(123, n);
+    }
+
+    @Test
+    public void getCharReturnsCharOnValidString(){
+        String text = "Abc";
+        DataInput dataInput = getDataInput(text);
+
+        char actual = dataInput.getChar();
+
+        assertEquals('A', actual);
+    }
+
+    @Test
+    public void getCharReadsUntilValidInput(){
+        String text = "\n\n\nA";
+        DataInput dataInput = getDataInput(text);
+
+        char actual = dataInput.getChar();
+
+        assertEquals('A', actual);
+    }
+
+    @Test
+    public void getDoubleReadsUntilValidInput(){
+        double expected = 12.345;
+        String text = "\nbla\nbla\nbla\n" + expected;
+        DataInput dataInput = getDataInput(text);
+
+        double actual = dataInput.getDouble();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getDoubleReturnsDoubleOnValidInput(){
+        double expected = 12.345;
+        String text = Double.toString(expected);
+        DataInput dataInput = getDataInput(text);
+
+        double actual = dataInput.getDouble();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getLongReadsUntilValidInput(){
+        long expected = -12345;
+        String text = "\nbla\nbla\nbla\n" + expected;
+        DataInput dataInput = getDataInput(text);
+
+        long actual = dataInput.getLong();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getLongReturnsDoubleOnValidInput(){
+        long expected = -12345;
+        String text = Long.toString(expected);
+        DataInput dataInput = getDataInput(text);
+
+        double actual = dataInput.getLong();
+
+        assertEquals(expected, actual);
     }
 
     private DataInput getDataInput(String str){
