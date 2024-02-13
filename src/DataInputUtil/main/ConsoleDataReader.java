@@ -1,4 +1,4 @@
-package DataInputUtil;
+package DataInputUtil.main;
 
 /**
  * Static adapter for StreamDataReader

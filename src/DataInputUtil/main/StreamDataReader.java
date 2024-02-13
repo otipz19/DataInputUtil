@@ -1,4 +1,4 @@
-package DataInputUtil;gi
+package DataInputUtil.main;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,5 +1,6 @@
-package DataInputUtil;
+package DataInputUtil.tests;
 
+import DataInputUtil.main.StreamDataReader;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
