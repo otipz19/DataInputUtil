@@ -38,7 +38,7 @@ public class ConsoleDataReader {
     }
 
     public static double getNegativeNumber(String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt);
         return streamDataReader.getNegativeNumber();
     }
 
@@ -56,7 +56,7 @@ public class ConsoleDataReader {
     }
 
     public static double getDouble(String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt);
         return streamDataReader.getDouble();
     }
 
@@ -74,7 +74,7 @@ public class ConsoleDataReader {
     }
 
     public static long getLong(String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt);
         return streamDataReader.getLong();
     }
 
@@ -92,7 +92,7 @@ public class ConsoleDataReader {
     }
 
     public static char getChar(String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt);
         return streamDataReader.getChar();
     }
 
@@ -110,7 +110,7 @@ public class ConsoleDataReader {
     }
 
     public static int getInt(String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt);
         return streamDataReader.getInt();
     }
 
@@ -128,7 +128,7 @@ public class ConsoleDataReader {
     }
 
     public static String getLine(String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt);
         return streamDataReader.getLine();
     }
 }
