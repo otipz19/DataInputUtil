@@ -1,5 +1,8 @@
 package DataInputUtil.main;
 
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class ConsoleUtils {
     public static void runProcessUntilStop(String stopWord, Runnable process){
         while(true){
@@ -38,7 +41,17 @@ public class ConsoleUtils {
         }
     }
 
-    private static void printPrompts(IOption[] options) {
+    public static void readOptionsUntilStop(String stopMsg, Option... options){
+        AtomicBoolean isStopped = new AtomicBoolean(false);
+        while(!isStopped.get()){
+            Option[] extendedOptions = Arrays.copyOf(options, options.length + 1);
+            extendedOptions[extendedOptions.length - 1] = new Option(
+                    stopMsg, () -> isStopped.set(true));
+            readOptions(extendedOptions);
+        }
+    }
+
+    static void printPrompts(IOption[] options) {
         for(int i = 0; i < options.length; i++){
             System.out.println((i+1) + ". " + options[i].getPrompt());
         }
