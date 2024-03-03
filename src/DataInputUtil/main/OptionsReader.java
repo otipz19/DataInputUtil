@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class OptionsReader {
     private boolean isStopped;
     private Option[] options;
-    private Runnable prefix;
 
     public OptionsReader(Option... options) {
         processStopOptions(options);
@@ -13,7 +12,7 @@ public class OptionsReader {
 
     public OptionsReader(Runnable prefix, Option... options) {
         processStopOptions(options);
-        this.prefix = prefix;
+        addPrefixToOptions(prefix, options);
     }
 
     private void processStopOptions(Option[] options) {
@@ -34,11 +33,17 @@ public class OptionsReader {
             if(title != null){
                 System.out.println(title);
             }
-            if (prefix == null) {
-                ConsoleUtils.readOptions(options);
-            } else {
-                ConsoleUtils.readOptions(prefix, options);
-            }
+            ConsoleUtils.readOptions(options);
+        }
+    }
+
+    private static void addPrefixToOptions(Runnable prefix, Option[] options) {
+        for(Option o: options){
+            Runnable original = o.getAction();
+            o.setAction(() -> {
+                prefix.run();
+                original.run();
+            });
         }
     }
 }
