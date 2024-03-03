@@ -20,4 +20,9 @@ public class OptionsReader {
             ConsoleUtils.readOptions(options);
         }
     }
+
+    public void readUntilStop(String title){
+        System.out.println(title);
+        readUntilStop();
+    }
 }
