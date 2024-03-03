@@ -19,6 +19,11 @@ public class ConsoleUtils {
         }
     }
 
+    public static void readOptions(Runnable prefix, Option... options){
+        addPrefixToOptions(prefix, options);
+        readOptions(options);
+    }
+
     public static void readOptions(Option... options){
         printPrompts(options);
         while(true){
@@ -43,6 +48,16 @@ public class ConsoleUtils {
             else{
                 return options[inputIndex - 1].run();
             }
+        }
+    }
+
+    private static void addPrefixToOptions(Runnable prefix, Option[] options) {
+        for(Option o: options){
+            Runnable original = o.getAction();
+            o.setAction(() -> {
+                prefix.run();
+                original.run();
+            });
         }
     }
 

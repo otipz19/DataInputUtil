@@ -16,4 +16,12 @@ public class Option implements IOption{
     public String getPrompt() {
         return prompt;
     }
+
+    void setAction(Runnable action){
+        this.action = action;
+    }
+
+    Runnable getAction(){
+        return action;
+    }
 }
