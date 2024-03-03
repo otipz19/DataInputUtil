@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ConsoleUtils {
+    public static boolean askQuestion(String question){
+        return ConsoleDataReader
+                .getLine(question + " [y/n]").toLowerCase().trim().startsWith("y");
+    }
+
     public static void runProcessUntilStop(String stopWord, Runnable process){
         while(true){
             process.run();
